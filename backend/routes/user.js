@@ -100,6 +100,29 @@ router.post("/sign-in", async (req, res) => {
     }
 });
 
-// User Sign Out
+// User Logout
+router.post("/logout", (req, res) => {
+    try {
+        res.clearCookie("podcasterUserToken", {
+            httpOnly: true,
+        });
+        res.status(200).json({ message: "User logged out successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error in Logout", error });
+    }
+});
+
+// Check Cookie present or not
+router.get("/check-cookie", (req, res) => {
+    try {
+        const token = req.cookies.podcasterUserToken;
+        if (!token) {
+            return res.status(401).json({ message: "No cookie found" });
+        }
+        res.status(200).json({ message: "Cookie is present" });
+    } catch (error) {
+        res.status(500).json({ message: "Error in Checking Cookie", error });
+    }
+});
 
 export default router;
