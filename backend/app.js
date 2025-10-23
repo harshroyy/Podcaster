@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import cookieParser from "cookie-parser";
 
 dotenv.config();              // 1️⃣ Load environment variables first
 
@@ -8,6 +9,7 @@ import userApi from "./routes/user.js"; // 3️⃣ Import routes
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON bodies
+app.use(cookieParser()); // Middleware to parse cookies
 
 // ===== API Routes =====
 app.use("/api/v1", userApi);
