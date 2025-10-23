@@ -1,5 +1,5 @@
 import express from "express";
-import User from "../models/user";
+import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 
 const router = express.Router();
@@ -45,6 +45,8 @@ router.post("/sign-up", async (req, res) => {
         res.status(200).json({ message: "User registered successfully" });
 
     } catch (error) {
-        res.status(400).json({ message: "Error in Sign Up", error});
+        res.status(500).json({ message: "Error in Sign Up", error});
     }
 });
+
+export default router;
